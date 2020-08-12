@@ -1,7 +1,7 @@
 # Packaging Test
 Explore how to contend PyPi & exports.
 
-This is a very minor adaption of the [PyPa Sample Project](https://github.com/pypa/sampleproject):
+This is a very minor adaption of the [PyPa Sample Project](https://github.com/pypa/sampleproject), referenced from [this doc](https://packaging.python.org/guides/distributing-packages-using-setuptools/):
 * PyPa name changed in setup
 * addition of ```src/sample/run.py```
 * and ability to call it (```sample-run```) in setup.py (search for valhuber)
