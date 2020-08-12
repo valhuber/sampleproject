@@ -9,7 +9,7 @@ This is a very minor adaption of the [PyPa Sample Project](https://github.com/py
 The failure to run ```sample-run``` is posted to [StackOverflow](https://stackoverflow.com/questions/63363476/pypi-installed-app-fails-with-modulenotfound).
 
 ## Install (VSCode)
-Source Control view, clone: https://github.com/valhuber/inheritance.git.
+Source Control view, clone: https://github.com/valhuber/sampleproject.git.
 ```
 cd sampleproject
 virtualenv venv
