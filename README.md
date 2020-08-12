@@ -3,8 +3,8 @@ Explore how to contend PyPi & exports.
 
 This is a very minor adaption of the [PyPa Sample Project](https://github.com/pypa/sampleproject):
 * PyPa name changed in setup
-* addition of src/sample/run.py
-* and ability to call it in setup (search for valhuber)
+* addition of ```src/sample/run.py```
+* and ability to call it (```sample-run```) in setup.py (search for valhuber)
 
 The failure to run ```sample-run``` is posted to [StackOverflow](https://stackoverflow.com/questions/63363476/pypi-installed-app-fails-with-modulenotfound).
 
@@ -30,7 +30,7 @@ cd sampleproject
 python src/sample/run.py
 ```
 
-Suggestion: standard sampleproject might not want to use ```sample``` to run, since that's a pre-defined utility on the mac.  Mac users need to run something like 
+__Suggestion:__ standard sampleproject might not want to use ```sample``` to run, since that's a pre-defined utility on the mac.  Mac users need to run something like 
 ```
 /Users/val/python/vscode/sampleproject/venv/bin/sample
 ```
@@ -79,12 +79,11 @@ sample-run
 Currently failing:
 
 ```
-((venv) val@valMbp sampleproject % sample-run
+(venv) val@valMbp sampleproject % sample-run
 Traceback (most recent call last):
   File "/Users/val/python/vscode/sampleproject/venv/bin/sample-run", line 5, in <module>
     from sample.run import main
   File "/Users/val/python/vscode/sampleproject/venv/lib/python3.8/site-packages/sample/run.py", line 1, in <module>
     import simple
 ModuleNotFoundError: No module named 'simple'
-(venv) val@valMbp sampleproject % 
-```
+(venv) val@valMbp sampleproject % ```

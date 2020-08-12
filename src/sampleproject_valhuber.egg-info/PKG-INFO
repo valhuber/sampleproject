@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: sampleproject-valhuber
-Version: 2.0.3
+Version: 2.0.4
 Summary: A sample Python project
 Home-page: https://github.com/pypa/sampleproject
 Author: A. Random Developer
@@ -10,45 +10,96 @@ Project-URL: Bug Reports, https://github.com/pypa/sampleproject/issues
 Project-URL: Funding, https://donate.pypi.org
 Project-URL: Say Thanks!, http://saythanks.io/to/example
 Project-URL: Source, https://github.com/pypa/sampleproject/
-Description: # A sample Python project
+Description: # Packaging Test
+        Explore how to contend PyPi & exports.
         
-        ![Python Logo](https://www.python.org/static/community_logos/python-logo.png "Sample inline image")
+        This is a very minor adaption of the [PyPa Sample Project](https://github.com/pypa/sampleproject):
+        * PyPa name changed in setup
+        * addition of src/sample/run.py
+        * and ability to call it in setup (search for valhuber)
         
-        A sample project that exists as an aid to the [Python Packaging User
-        Guide][packaging guide]'s [Tutorial on Packaging and Distributing
-        Projects][distribution tutorial].
+        The failure to run ```sample-run``` is posted to [StackOverflow](https://stackoverflow.com/questions/63363476/pypi-installed-app-fails-with-modulenotfound).
         
-        This project does not aim to cover best practices for Python project
-        development as a whole. For example, it does not provide guidance or tool
-        recommendations for version control, documentation, or testing.
+        ## Install (VSCode)
+        Source Control view, clone: https://github.com/valhuber/sampleproject.git.
+        ```
+        cd sampleproject
+        virtualenv venv
+        # windows: .\venv\Scripts\activate
+        source venv/bin/activate
+        pip install -r requirements.txt
+        ```
         
-        [The source for this project is available here][src].
+        ## Run Locally
         
-        Most of the configuration for a Python project is done in the `setup.py` file,
-        an example of which is included in this project. You should edit this file
-        accordingly to adapt this sample project to your needs.
+        VSCode: F5 for `run.py`. Should print:
+        ```
+        add_one(2) = 3
+        ```
+        Or, from command console:
+        ```
+        cd sampleproject
+        python src/sample/run.py
+        ```
         
-        ----
+        __Suggestion:__ standard sampleproject might not want to use ```sample``` to run, since that's a pre-defined utility on the mac.  Mac users need to run something like 
+        ```
+        /Users/val/python/vscode/sampleproject/venv/bin/sample
+        ```
         
-        This is the README file for the project.
+        ## Deploy to Pypi
+        Using [this reference](https://packaging.python.org/tutorials/packaging-projects/)...
         
-        The file should use UTF-8 encoding and can be written using
-        [reStructuredText][rst] or [markdown][md use] with the appropriate [key set][md
-        use]. It will be used to generate the project webpage on PyPI and will be
-        displayed as the project homepage on common code-hosting services, and should be
-        written for that purpose.
+        Acquire the setup software (initial, 1-time setup):
+        ```
+        cd sampleproject
+        deactivate
+        python setup.py install
+        python3 -m pip install --user --upgrade twine
+        python3 -m pip install --user --upgrade setuptools wheel
+        ```
         
-        Typical contents for this file would include an overview of the project, basic
-        usage examples, etc. Generally, including the project changelog in here is not a
-        good idea, although a simple “What's New” section for the most recent version
-        may be appropriate.
+        Creating the `dist`, **first time**
+        Get a [Saved API Key](https://test.pypi.org/manage/account/#api-tokens)
         
-        [packaging guide]: https://packaging.python.org
-        [distribution tutorial]: https://packaging.python.org/tutorials/packaging-projects/
-        [src]: https://github.com/pypa/sampleproject
-        [rst]: http://docutils.sourceforge.net/rst.html
-        [md]: https://tools.ietf.org/html/rfc7764#section-3.5 "CommonMark variant"
-        [md use]: https://packaging.python.org/specifications/core-metadata/#description-content-type-optional
+        ```
+        python3 setup.py sdist bdist_wheel  # verify this produces the dist folder
+        python3 -m twine upload --repository testpypi dist/*  # upload to test Pypi
+        ```
+        User is `__token__`, pwd is **Saved API Key** (from above).
+        
+        This should upload to the [Pypi site](https://test.pypi.org/project/sampleproject-valhuber/)
+        
+        To **re-upload:**
+        1. Delete the `dist` folder (and `build`, and `.egg`)
+        2. Alter the version number in `__init__`
+        ```
+        python3 setup.py sdist bdist_wheel
+        python3 -m twine upload  --skip-existing --repository testpypi dist/*
+        ```
+        
+        To install (beware - may require 15 mins until new version is active.
+        
+        ```
+        # windows: .\venv\Scripts\activate
+        source venv/bin/activate
+        pip uninstall sampleproject-valhuber
+        pip install -i https://test.pypi.org/simple/ sampleproject-valhuber
+        sample-run
+        ```
+        
+        Currently failing:
+        
+        ```
+        ((venv) val@valMbp sampleproject % sample-run
+        Traceback (most recent call last):
+          File "/Users/val/python/vscode/sampleproject/venv/bin/sample-run", line 5, in <module>
+            from sample.run import main
+          File "/Users/val/python/vscode/sampleproject/venv/lib/python3.8/site-packages/sample/run.py", line 1, in <module>
+            import simple
+        ModuleNotFoundError: No module named 'simple'
+        (venv) val@valMbp sampleproject % 
+        ```
         
 Keywords: sample,setuptools,development
 Platform: UNKNOWN
