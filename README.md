@@ -6,7 +6,7 @@ This is a very minor adaption of the [PyPa Sample Project](https://github.com/py
 * addition of src/sample/run.py
 * and ability to call it in setup (search for valhuber)
 
-It is posted to [StackOverflow](https://stackoverflow.com/questions/63363476/pypi-installed-app-fails-with-modulenotfound).
+The failure to run ```sample-run``` is posted to [StackOverflow](https://stackoverflow.com/questions/63363476/pypi-installed-app-fails-with-modulenotfound).
 
 ## Install (VSCode)
 Source Control view, clone: https://github.com/valhuber/inheritance.git.
