@@ -8,6 +8,8 @@ This is a very minor adaption of the [PyPa Sample Project](https://github.com/py
 
 The failure to run ```sample-run``` is posted to [StackOverflow](https://stackoverflow.com/questions/63363476/pypi-installed-app-fails-with-modulenotfound).
 
+8/13/2010 update: suggested fix works.
+
 ## Install (VSCode)
 Source Control view, clone: https://github.com/valhuber/sampleproject.git.
 ```
